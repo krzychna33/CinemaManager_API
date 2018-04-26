@@ -13,7 +13,7 @@ JWT_ALGO;
 
 ## DB Project
 
-![alt text](https://raw.githubusercontent.com/krzychna33/cinema_crm_api/master/dbCinema.png)
+![alt text](https://lh5.googleusercontent.com/vam9X3YXgP6qC8KKzNWalXyqZKTxlTaV5Wz86arChSu1StN1uSHrWPodr3MNq5pJlfG6CjoQAwi1tOXpL0Dt=w1920-h900-rw)
 
 
 
