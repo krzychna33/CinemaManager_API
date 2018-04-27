@@ -4,15 +4,15 @@ namespace App\Repositories;
 
 use App\Reservation;
 
-class ReservationService{
+class ReservationRepository{
     
     public function check($seat, $showingId){
 
-        if(count(Reservation::where([
+        if(Reservation::where([
             ['seat', '=', $seat['seat']],
             ['row', '=', $seat['row']],
             ['showingId', '=', $showingId]
-        ])->get())!=0){
+        ])->count()!=0){
             return false;
         }
         return true;

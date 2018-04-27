@@ -48,7 +48,7 @@ class MoviesController extends Controller
             'success' => true,
             'message' => 'Movie created!',
             'data' => $movie
-        ], 200);
+        ], 201);
 
     }
 
@@ -104,12 +104,11 @@ class MoviesController extends Controller
                 'message' => 'Movie has found!',
                 'data' => $movie
             ], 200);
-        } else {
-            return response()->json([
-                'success' => false,
-                'message' => 'Update error!',
-            ], 400);
         }
+        return response()->json([
+            'success' => false,
+            'message' => 'Update error!',
+        ], 400);
     }
 
     /**

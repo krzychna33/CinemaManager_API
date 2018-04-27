@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Repositories\ReservationService;
+use App\Repositories\ReservationRepository;
 use App\Reservation;
 use App\Showing;
 use App\Movie;
@@ -14,10 +14,10 @@ use Illuminate\Support\Facades\Mail;
 
 class ReservationsController extends Controller
 {
-    private $reservationService;
+    private $reservationRepository;
 
-    public function __construct(ReservationService $reservationService){
-        $this->reservationService = $reservationService;
+    public function __construct(ReservationRepository $reservationRepository){
+        $this->reservationRepository = $reservationRepository;
     }
 
     /**
@@ -33,18 +33,14 @@ class ReservationsController extends Controller
         $email = $request->get('email');
         $seats = $request->get('seats');
 
-        //return $this->reservationService->check($seats[0], $showingId);
-
-
-
         foreach ($seats as $seat) {
-            if(!$this->reservationService->validateSeats($seat)){
+            if(!$this->reservationRepository->validateSeats($seat)){
                 return response()->json([
                     'success' => false,
                     'message' => 'Wrong seats!'
                 ], 400);
             }
-            if(!$this->reservationService->check($seat, $showingId)){
+            if(!$this->reservationRepository->check($seat, $showingId)){
                 return response()->json([
                     'success' => false,
                     'message' => 'Seats already taken!'
@@ -75,14 +71,16 @@ class ReservationsController extends Controller
             'success' => true,
             'message' => 'Reservation completed!',
             'data' => $seats
-        ], 400);
-
+        ], 201);
 
     }
 
-
     public function cancelReservation($hash){
         Reservation::where('deleteHash', $hash)->delete();
-        return "ANULOWANO REZERWACJE";
+        return 'Reservation canceled!';
+        // return response()->json([
+        //     'success' => true,
+        //     'message' => 'Reservation canceled!'
+        // ], 204);
     }
 }

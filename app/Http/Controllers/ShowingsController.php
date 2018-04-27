@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Showing;
-use \App\Repositories\ShowingService;
+use \App\Repositories\ShowingRepository;
 
 class ShowingsController extends Controller
 {
@@ -14,10 +14,10 @@ class ShowingsController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    private $showingService;
+    private $showingRepository;
 
-    public function __construct(ShowingService $showingService){
-        $this->showingService = $showingService;
+    public function __construct(ShowingRepository $showingRepository){
+        $this->showingRepository = $showingRepository;
     }
     public function index()
     {
@@ -45,7 +45,7 @@ class ShowingsController extends Controller
         $showingTime = $request->get('showingTime');
         $showingEndTime = $request->get('showingEndTime');
         $showing = null;
-        if(count($this->showingService->findShowingsbyDate($showingTime, $showingEndTime))==0){
+        if(count($this->showingRepository->findShowingsbyDate($showingTime, $showingEndTime))==0){
             $showing = Showing::create($request->all());
         } else {
             return response()->json([
@@ -59,7 +59,7 @@ class ShowingsController extends Controller
                 'success' => true,
                 'message' => 'Showing created!',
                 'data' => $showing
-            ], 200);
+            ], 201);
         }
     }
 
