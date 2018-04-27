@@ -14,7 +14,7 @@ JWT_ALGO;
 
 ## DB Project
 
-![alt text](https://lh5.googleusercontent.com/vam9X3YXgP6qC8KKzNWalXyqZKTxlTaV5Wz86arChSu1StN1uSHrWPodr3MNq5pJlfG6CjoQAwi1tOXpL0Dt=w1920-h900-rw)
+![alt text](https://i.gyazo.com/bc2eeed8e17a340d79444e7e401d240c.png)
 
 ## Routes
 ![alt text](https://i.gyazo.com/53697ebe096bc101045e651cc1eb58a0.png)
