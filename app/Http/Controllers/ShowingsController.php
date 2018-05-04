@@ -21,7 +21,13 @@ class ShowingsController extends Controller
     }
     public function index()
     {
-        return Showing::all();
+        $showings = Showing::all();
+        $showings->each(function($showing){
+            $movie = $showing->Movie()->value('title');
+            $showing->movieTitle = $movie;
+        });
+
+        return $showings;
     }
 
     /**
@@ -73,6 +79,8 @@ class ShowingsController extends Controller
     {
         $showing = Showing::find($id);
         $reservations = $showing->reservations;
+        $movie = $showing->Movie()->value('title');
+        $showing->movieTitle = $movie;
 
         if($showing){
             return response()->json([
