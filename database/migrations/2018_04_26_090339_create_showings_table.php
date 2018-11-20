@@ -19,7 +19,7 @@ class CreateShowingsTable extends Migration
             $table->dateTime('showingTime');
             $table->dateTime('showingEndTime');
             $table->boolean('active')->default(true);
-            $table->decimal('price', 8, 2);
+            $table->bigInteger('price');
             $table->timestamps();
             $table->softDeletes();
 

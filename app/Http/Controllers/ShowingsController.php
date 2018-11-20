@@ -114,9 +114,19 @@ class ShowingsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Showing $showing)
     {
-        //
+        if($showing->update($request->all())){
+            return response()->json([
+                'success' => true,
+                'message' => 'Showing has found!',
+                'data' => $showing
+            ], 200);
+        }
+        return response()->json([
+            'success' => false,
+            'message' => 'Update error!',
+        ], 400);
     }
 
     /**
@@ -127,7 +137,8 @@ class ShowingsController extends Controller
      */
     public function destroy($id)
     {
-        $showing = Showing::destory($id);
+        $showing = Showing::find($id);
+        $showing->delete();
 
         if($showing){
             return response()->json([
