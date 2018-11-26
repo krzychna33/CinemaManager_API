@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Movie;
+use Validator;
+use Illuminate\Support\Facades\Storage;
 
 class MoviesController extends Controller
 {
@@ -132,5 +134,39 @@ class MoviesController extends Controller
                 'message' => 'Movie has not deleted!',
             ], 400);
         }
+    }
+
+    public function mediaUpload(Request $request, $id){
+
+        $movie = Movie::find($id);
+
+        if(!$movie){
+            return response()->json([
+                'success' => false,
+                'message' => 'Movie with this id not found!',
+            ], 404);
+        }
+
+        $validator = Validator::make($request->all(), [
+            'image' => 'required|image'
+        ]);
+
+        if($validator->fails()){
+            return response()->json([
+                'success' => false,
+                'message' => 'Media source is not valid',
+            ], 400);
+        }
+
+        $file = Storage::disk('public')->put('movie_images', $request->file('image'));
+        $movie->image = $file;
+        $movie->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Media uploaded!',
+            'data' => $movie
+        ], 200);
+
     }
 }

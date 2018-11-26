@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Showing;
 use \App\Repositories\ShowingRepository;
+use Illuminate\Support\Facades\Storage;
 
 class ShowingsController extends Controller
 {
@@ -24,7 +25,9 @@ class ShowingsController extends Controller
         $showings = Showing::all();
         $showings->each(function($showing){
             $movie = $showing->Movie()->value('title');
+            $image = $showing->Movie()->value('image');
             $showing->movieTitle = $movie;
+            $showing->movieImage = $image;
         });
 
         return $showings;
@@ -80,7 +83,9 @@ class ShowingsController extends Controller
         $showing = Showing::find($id);
         $reservations = $showing->reservations;
         $movie = $showing->Movie()->value('title');
+        $image = $showing->Movie()->value('image');
         $showing->movieTitle = $movie;
+        $showing->movieImage = $image;
 
         if($showing){
             return response()->json([

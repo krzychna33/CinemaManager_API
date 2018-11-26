@@ -10,7 +10,7 @@ Route::group([
         'showings' => 'ShowingsController',
     ]);
 
-    Route::post('movies/upload-media/{id}', 'ShowingsController@uploadMedia');
+    Route::post('movies/media-upload/{id}', 'MoviesController@mediaUpload');
     Route::post('logout', 'AuthController@logout');
     Route::post('refresh', 'AuthController@refresh');
 });
