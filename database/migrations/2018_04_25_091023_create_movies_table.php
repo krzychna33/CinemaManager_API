@@ -18,6 +18,7 @@ class CreateMoviesTable extends Migration
             $table->string('title');
             $table->integer('year');
             $table->text('description');
+            $table->string('image');
             $table->timestamps();
             $table->softDeletes();
         });
