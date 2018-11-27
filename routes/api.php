@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 
 Route::group([
-//    'middleware' => 'auth.api'
+    'middleware' => 'auth.api'
 ], function(){
     Route::resources([
         'movies' => 'MoviesController',
@@ -25,4 +25,4 @@ Route::resources([
 
 Route::get('reservations/cancel-reservation/{hash}', 'ReservationsController@cancelReservation');
 
-Route::post('login', 'AuthController@login');
+Route::post('login', 'AuthController@login')->name('login');;
