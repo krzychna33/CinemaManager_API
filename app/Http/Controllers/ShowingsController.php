@@ -158,4 +158,39 @@ class ShowingsController extends Controller
             ], 400);
         }
     }
+
+    public function showForUnauthenticated($id){
+
+        $showing = Showing::find($id);
+
+        $reservationsArray = $showing->reservations()->get();
+        $reservations = [];
+        foreach($reservationsArray as $reservation){
+            $reservationItem = [
+                'row' => $reservation->row,
+                'seat' => $reservation->seat
+            ];
+            array_push($reservations, $reservationItem);
+        }
+
+        $movie = $showing->Movie()->value('title');
+        $image = $showing->Movie()->value('image');
+        $showing->reservations = $reservations;
+        $showing->movieTitle = $movie;
+        $showing->movieImage = $image;
+
+        if($showing){
+            return response()->json([
+                'success' => true,
+                'message' => 'Showing has found!',
+                'data' => $showing,
+            ], 200);
+        } else {
+            return response()->json([
+                'success' => true,
+                'message' => 'Showing not found!',
+            ], 404);
+        }
+
+    }
 }

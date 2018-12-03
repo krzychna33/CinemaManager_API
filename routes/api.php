@@ -16,7 +16,8 @@ Route::group([
 });
 
 Route::get('showings', 'ShowingsController@index');
-Route::get('showings/{showing}', 'ShowingsController@show');
+//Route::get('showings/{showing}', 'ShowingsController@show');
+Route::get('showings-unauthenticated/{showing}', 'ShowingsController@showForUnauthenticated');
 
 
 Route::resources([
