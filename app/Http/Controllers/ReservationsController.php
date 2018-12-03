@@ -60,7 +60,8 @@ class ReservationsController extends Controller
             $reservation->save();
         }
 
-        $deleteURL = env('APP_URL')."/api/reservations/cancel-reservation/".$deleteHash;
+        $app_url = env('APP_URL');
+        $deleteURL = $app_url."/api/reservations/cancel-reservation/".$deleteHash;
         $showing = Showing::find($showingId);
         $movie = $showing->movie->title;
         $showingDate = $showing->showingTime;
@@ -70,7 +71,8 @@ class ReservationsController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Reservation completed!',
-            'data' => $seats
+            'data' => $seats,
+            'deleteURL' => $deleteURL
         ], 201);
 
     }
