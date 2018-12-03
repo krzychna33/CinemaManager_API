@@ -12,7 +12,7 @@ JWT_ALGO;
 4) Add private and public key in the storage/jwt
 5) Set up mail in env
 
-##Running
+## Running
 
 1) make migrations with seed data
 ```
