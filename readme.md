@@ -16,7 +16,7 @@ JWT_ALGO;
 
 1) make migrations with seed data
 ```
-php aritsan migrate -seed
+php aritsan migrate --seed
 ```
 2) Run project on localhost or in LAN
 ```
